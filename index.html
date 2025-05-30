@@ -299,7 +299,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr><th>Item</th><td>${item.item}</td></tr>
+            <tr><th>Item</th><td><b>${item.item}</b></td></tr>
             <tr>
               <th>Origin</th>
               <td>${flagOrigin ? `<img class="flag-icon" src="${flagOrigin}" alt="">` : ''}${item.origin}</td>
@@ -309,8 +309,8 @@
               <th>Destination</th>
               <td>${flagDest ? `<img class="flag-icon" src="${flagDest}" alt="">` : ''}${item.destination}</td>
             </tr>
-            <tr><th>Arrival Date</th><td>${item.arrival_date}</td></tr>
-            <tr><th>Estimated Arrival</th><td>${item.estimated_arrival}</td></tr>
+            <tr><th>Sent Date</th><td>${item.arrival_date}</td></tr>
+            <tr><th>E.D.A</th><td>${item.estimated_arrival}</td></tr>
           </tbody>
         `;
         out.appendChild(table);
