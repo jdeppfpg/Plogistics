@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PLogistics Delivery Service</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-light: #f5f5f5;
+      --bg-dark: #9b2b2b;
+      --text-light: #222;
+      --text-dark: #ddd;
+      --card-shadow: rgba(8,70,0,0.15);
+    }
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-light);
+      transition: background-color .3s, color .3s;
+    }
+    h1,h2,h3,h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+    }
+    .section-icon { font-size: 1.5rem; margin-right: .5rem; }
+
+    /* --- Track Section: Horizontal Flying Emojis --- */
+    #track { position: relative; overflow: visible; }  
+    
+    @media (prefers-color-scheme: dark) {
+      body { background-color: var(--bg-dark); color: var(--text-dark); }
+     /* .navbar, footer { background-color: #222 !important; }
+     */ 
+      
+      /* Make the navbar stick to the top */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #222 !important;
+  z-index: 1000; /* ensures it stays above other elements */
+}
+
+
+/* Optional: Add padding to the body to prevent overlap */
+body {
+  padding-top: 60px; /* adjust based on your navbar height */
+  padding-bottom: 60px; /* adjust based on your footer height */
+}
+      
+      .card { background-color: #333; }
+    }
+
+    .error { color: red; font-weight: bold; }
+    #loader {
+      display: none;
+      width: 2rem; height: 2rem;
+      border: 3px solid #ccc; border-top: 3px solid #007bff;
+      border-radius: 50%; animation: spin 1s linear infinite;
+      margin: 1rem auto;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .flag-icon {
+      width: 24px; height: 16px; margin-right: 6px;
+      object-fit: cover; border-radius: 3px;
+    }
+    .close-icon {
+      float: right; cursor: pointer; font-size: 1.3rem; color: #888;
+    }
+    .close-icon:hover { color: red; }
+    .btn-blue {
+      background-color: #007bff; color: #fff; border: none;
+    }
+    .btn-blue:hover { background-color: #0069d9; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="#hero">PLogistics</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#track">Track</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="container mb-5">
+    <!-- TRACK SECTION -->
+    <section id="track" class="card p-4 mb-5 position-relative">
+      <h2 class="text-center mb-3">Track Your Shipment</h2>
+      <p>Enter your tracking number to view real-time shipment status, location, delivery estimates, and journey progress.</p>
+
+      <form class="row g-2 mb-3" onsubmit="event.preventDefault(); trackItem();">
+        <div class="col-md-8">
+          <input type="text" id="trackId" class="form-control" placeholder="Paste Your Tracking ID Here">
+        </div>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-blue w-100">Track</button>
+        </div>
+      </form>
+
+      <div id="loader"></div>
+      <div id="output" class="mt-3"></div>
+      <center><a href="#">Visit Main site</a></center>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="card p-4 mb-5">
+      <h2 class="text-center mb-3"><span class="section-icon">🛠️</span>Our Services</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card h-100 p-3">
+            <h5>🛣️ Ground</h5>
+            <p>Reliable delivery via road networks with robust tracking and cost efficiency.</p>
+            <a href="#">Read More</a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100 p-3">
+            <h5>✈️ Air Freight</h5>
+            <p>Fast, time-critical shipments with real-time visibility across international routes.</p>
+            <a href="#">Read More</a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100 p-3">
+            <h5>🚢 Sea Freight</h5>
+            <p>Optimized global shipping for large-volume cargo with end-to-end documentation.</p>
+            <a href="#">Read More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="card p-4 mb-5">
+      <h2 class="mb-3"><span class="section-icon">ℹ️</span>About Us</h2>
+      <p>ELoz Delivery is dedicated to operational excellence and customer-centric service, integrating advanced tech for seamless global trade.</p>
+      <a href="#">Read More</a>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card p-4 mb-5">
+      <h2 class="mb-3"><span class="section-icon">📞</span>Contact &amp; Policies</h2>
+      <p><strong>Email:</strong> support@elozdelivery.com<br>
+         <strong>Phone:</strong> +1 (234) 567-8901</p>
+      <p>Fair pricing and full refunds for lost packages. Our corporate support team is ready to assist.</p>
+      <a href="#">Read More</a>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-light text-center py-3">
+    <p class="mb-0">&copy; 2025 ELoz Delivery Service. All rights reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Supabase & Tracking Script -->
+  <script>
+    const SUPABASE_URL = "https://zrzaivmhfzswsktwzmxs.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpyemFpdm1oZnpzd3NrdHd6bXhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0OTQ1ODMsImV4cCI6MjA2NDA3MDU4M30.F9MY9rttTwBTs-AlK37eTHdnH5EoiQmPJN-b7ZDlgLU";
+
+    // Map city/country keywords to ISO 3166-1 alpha-2 codes
+    const countryMap = {
+      "nigeria": "ng", "abuja": "ng", "lagos": "ng",
+      "united kingdom": "gb", "uk": "gb", "london": "gb",
+      "united states": "us", "usa": "us", "new york": "us", "los angeles": "us",
+      "germany": "de", "berlin": "de",
+      "france": "fr", "paris": "fr",
+      "china": "cn", "beijing": "cn",
+      "india": "in", "delhi": "in",
+      "canada": "ca", "toronto": "ca",
+      "ghana": "gh", "accra": "gh",
+      "kenya": "ke", "nairobi": "ke",
+      "south africa": "za", "johannesburg": "za",
+      "italy": "it", "rome": "it",
+      "spain": "es", "madrid": "es",
+      "netherlands": "nl", "amsterdam": "nl"
+    };
+
+    function getFlagURL(location) {
+      if (!location) return "";
+      const normalized = location.toLowerCase().trim();
+      for (const key in countryMap) {
+        if (normalized.includes(key)) {
+          return `https://flagcdn.com/24x18/${countryMap[key]}.png`;
+        }
+      }
+      return ""; // no match → no flag
+    }
+
+    function closeResult() {
+      const tbl = document.getElementById("trackingTable");
+      if (tbl) tbl.remove();
+      document.getElementById("trackId").value = "";
+    }
+
+    async function trackItem() {
+      const id = document.getElementById("trackId").value.trim();
+      const out = document.getElementById("output");
+      const load = document.getElementById("loader");
+      out.innerHTML = ""; load.style.display = "block";
+
+      if (!id) {
+        load.style.display = "none";
+        out.innerHTML = `<p class="error">Please enter a tracking ID.</p>`;
+        return;
+      }
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/plogistics?id=eq.${id}`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await res.json();
+        load.style.display = "none";
+
+        if (!data.length) {
+          out.innerHTML = `<p class="error">Item not found. Please check your ID.</p>`;
+          return;
+        }
+
+        const item = data[0];
+        const flagOrigin = getFlagURL(item.origin);
+        const flagDest   = getFlagURL(item.destination);
+
+        const table = document.createElement("table");
+        table.className = "table table-striped";
+        table.id = "trackingTable";
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th colspan="2">
+                Tracking Info
+                <span class="close-icon" onclick="closeResult()">❌</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>Item</th><td>${item.item}</td></tr>
+            <tr>
+              <th>Origin</th>
+              <td>
+                ${flagOrigin ? `<img class="flag-icon" src="${flagOrigin}" alt="">` : ''}${item.origin}
+              </td>
+            </tr>
+            <tr><th>Current Location</th><td>${item.location}</td></tr>
+            <tr>
+              <th>Destination</th>
+              <td>
+                ${flagDest ? `<img class="flag-icon" src="${flagDest}" alt="">` : ''}${item.destination}
+              </td>
+            </tr>
+            <tr><th>Arrival Date</th><td>${item.arrival_date}</td></tr>
+            <tr><th>Estimated Arrival</th><td>${item.estimated_arrival}</td></tr>
+          </tbody>
+        `;
+        out.appendChild(table);
+
+      } catch (err) {
+        load.style.display = "none";
+        out.innerHTML = `<p class="error">Something went wrong. Try again later.</p>`;
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
