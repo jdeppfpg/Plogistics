@@ -29,7 +29,7 @@
     .error{color:#d90429;font-weight:600;text-align:center}
     #loader{display:none;margin:1rem auto;text-align:center}
     .flag-icon{width:24px;height:16px;object-fit:cover;border-radius:3px;margin-right:6px}
-    .close-icon{float:right;font-size:1.2rem;cursor:pointer;color:#888}
+    .close-icon, a{float:right;font-size:1.2rem;cursor:pointer;color:#888}
     .close-icon:hover{color:#ff4040}
     .btn-blue{background:#007bff;color:#fff}
     .btn-blue:hover{background:#0069d9}
@@ -83,7 +83,7 @@
       </div>
 
       <div id="output" class="mt-3"></div>
-      <center><a href="#">Visit main site</a></center>
+      <center><b><a href="#">CONTACT CUSTOMER SUPPORT</a></b></center>
     </section>
 
     <!-- SERVICES -->
@@ -215,9 +215,12 @@
             <tr><th>Expected Delivery</th><td>${item.expected_delivery_d ?? item.expected_delivery_date ?? "—"}</td></tr>
             <tr><th>Current Location</th><td>${item.current_location ?? "—"}</td></tr>
             <tr><th>Status</th><td>${item.shipment_status ?? "—"}</td></tr>
-            <tr><th>Support Email</th><td>${item.support_email ?? "—"}</td></tr>
-            <tr><th>Created At</th><td>${item.created_at ?? "—"}</td></tr>
-          </tbody>`;
+        
+        </tbody>`
+        
+        ;
+       
+  
         out.appendChild(tbl);
 
       } catch(e) {
