@@ -5,127 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PLogistics Delivery Service</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;500&display=swap" rel="stylesheet"/>
 
   <style>
-    :root {
-      --bg-fixed: #f5f5f5;
-      --text-fixed: #222;
-      --card-bg: #fff;
-      --navbar-bg: #222;
-      --footer-bg: #222;
-      --footer-text: #fff;
+    :root{
+      --bg-light:#f5f5f5;
+      --bg-dark:#9b2b2b;
+      --text-light:#222;
+      --text-dark:#ddd;
     }
-
-    body {
-      font-family: 'Raleway', sans-serif;
-      background-color: var(--bg-fixed);
-      color: var(--text-fixed);
-      padding-top: 60px;
-      padding-bottom: 60px;
-      transition: none;
+    body{
+      font-family:'Raleway',sans-serif;
+      background:var(--bg-light);
+      color:var(--text-light);
+      transition:background .3s,color .3s;
     }
-
-    h1, h2, h3, h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-    }
-
-    .section-icon {
-      font-size: 1.5rem;
-      margin-right: .5rem;
-    }
-
-    #track {
-      position: relative;
-      overflow: visible;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: var(--navbar-bg) !important;
-      z-index: 1000;
-    }
-
-    .navbar .nav-link, .navbar .navbar-brand {
-      color: #fff !important;
-    }
-
-    footer {
-      background-color: var(--footer-bg);
-      color: var(--footer-text);
-    }
-
-    .error {
-      color: red;
-      font-weight: bold;
-    }
-
-    #loader {
-      display: none;
-      width: 2rem;
-      height: 2rem;
-      border: 3px solid #ccc;
-      border-top: 3px solid #007bff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 1rem auto;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .flag-icon {
-      width: 24px;
-      height: 16px;
-      margin-right: 6px;
-      object-fit: cover;
-      border-radius: 3px;
-    }
-
-    .close-icon {
-      float: right;
-      cursor: pointer;
-      font-size: 1.3rem;
-      color: #888;
-    }
-
-    .close-icon:hover {
-      color: red;
-    }
-
-    .btn-blue {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-    }
-
-    .btn-blue:hover {
-      background-color: #0069d9;
+    h1,h2,h3,h4{font-family:'Montserrat',sans-serif;font-weight:700}
+    .section-icon{font-size:1.5rem;margin-right:.5rem}
+    .error{color:#d90429;font-weight:600;text-align:center}
+    #loader{display:none;margin:1rem auto;text-align:center}
+    .flag-icon{width:24px;height:16px;object-fit:cover;border-radius:3px;margin-right:6px}
+    .close-icon{float:right;font-size:1.2rem;cursor:pointer;color:#888}
+    .close-icon:hover{color:#ff4040}
+    .btn-blue{background:#007bff;color:#fff}
+    .btn-blue:hover{background:#0069d9}
+    @media(prefers-color-scheme:dark){
+      body{background:var(--bg-dark);color:var(--text-dark)}
+      .card{background:#333}
+      .navbar{background:#222!important;position:fixed;top:0;left:0;width:100%;z-index:1000}
+      body{padding-top:60px;padding-bottom:60px}
     }
   </style>
 </head>
-<body>
 
+<body>
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark mb-4 shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm mb-4">
     <div class="container">
-      <a class="navbar-brand" href="#hero">PLogistics</a>
+      <a class="navbar-brand" href="#">PLogistics</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -140,565 +61,170 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main class="container mb-5">
+
     <!-- TRACK SECTION -->
     <section id="track" class="card p-4 mb-5 position-relative">
       <h2 class="text-center mb-3">Track Your Shipment</h2>
-      <p>Enter your tracking number to view real-time shipment status, location, delivery estimates, and journey progress.</p>
+      <p>Enter your tracking number to view real-time shipment status, location and delivery estimates.</p>
 
       <form class="row g-2 mb-3" onsubmit="event.preventDefault(); trackItem();">
         <div class="col-md-8">
-          <input type="text" id="trackId" class="form-control" placeholder="Paste Your Tracking ID Here">
+          <input id="trackId" class="form-control" placeholder="Paste Your Tracking ID Here" />
         </div>
         <div class="col-md-4">
-          <button type="submit" class="btn btn-blue w-100">Track</button>
+          <button class="btn btn-blue w-100" type="submit">Track</button>
         </div>
       </form>
 
-      <div id="loader"></div>
-      <div id="output" class="mt-3"></div>
-      <center><a href="#">Visit Main site</a></center>
-    </section>
-
-    <!-- SERVICES -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PLogistics Delivery Service</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway:wght@400;500&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-fixed: #f5f5f5;
-      --text-fixed: #222;
-      --card-bg: #fff;
-      --navbar-bg: #222;
-      --footer-bg: #222;
-      --footer-text: #fff;
-      --accent-blue: #3498db;
-      --light-blue-bg: #d1ecf1;
-      --light-blue-text: #0c5460;
-      --border-light-blue: #bee5eb;
-      --gray-line: #dcdcdc;
-    }
-
-    body {
-      font-family: 'Raleway', sans-serif;
-      background-color: var(--bg-fixed);
-      color: var(--text-fixed);
-      padding-top: 60px;
-      padding-bottom: 60px;
-      transition: none;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-    }
-
-    .section-icon {
-      font-size: 1.5rem;
-      margin-right: .5rem;
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background-color: var(--navbar-bg) !important;
-      z-index: 1000;
-    }
-
-    .navbar .nav-link, .navbar .navbar-brand {
-      color: #fff !important;
-    }
-
-    footer {
-      background-color: var(--footer-bg);
-      color: var(--footer-text);
-    }
-
-    .error {
-      color: red;
-      font-weight: bold;
-    }
-
-    #loader {
-      display: none;
-      width: 2rem;
-      height: 2rem;
-      border: 3px solid #ccc;
-      border-top: 3px solid #007bff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 1rem auto;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .flag-icon {
-      width: 24px;
-      height: 16px;
-      margin-right: 6px;
-      object-fit: cover;
-      border-radius: 3px;
-    }
-
-    .close-icon {
-      float: right;
-      cursor: pointer;
-      font-size: 1.3rem;
-      color: #888;
-    }
-
-    .close-icon:hover {
-      color: red;
-    }
-
-    .btn-blue {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-    }
-
-    .btn-blue:hover {
-      background-color: #0069d9;
-    }
-
-    /* —— NEW: Full‐Screen Overlay for the Tracking Report —— */
-    #trackingOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: none; /* Hidden by default; shown when a valid track ID is found */
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-
-    /* Inner container uses the “LogiTrack” look */
-    .overlay-container {
-      position: relative;
-      width: 90%;
-      max-width: 800px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .overlay-header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      position: relative;
-    }
-
-    .overlay-header h2 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    .overlay-close {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #eee;
-    }
-    .overlay-close:hover {
-      color: #ff6b6b;
-    }
-
-    .overlay-body {
-      padding: 20px;
-      font-size: 14px;
-    }
-
-    .status-box {
-      margin-bottom: 20px;
-      padding: 10px;
-      background-color: var(--light-blue-bg);
-      color: var(--light-blue-text);
-      border: 1px solid var(--border-light-blue);
-      border-radius: 5px;
-      font-size: 0.95rem;
-    }
-
-    .summary {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-    }
-
-    .summary div {
-      flex: 1 1 45%;
-    }
-
-    .progress-bar-overlay {
-      display: flex;
-      justify-content: space-between;
-      margin: 30px 0;
-      position: relative;
-    }
-
-    .progress-bar-overlay::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--gray-line);
-      z-index: 0;
-    }
-
-    .step {
-      position: relative;
-      z-index: 1;
-      width: 25px;
-      height: 25px;
-      background: var(--gray-line);
-      border-radius: 50%;
-      text-align: center;
-      line-height: 25px;
-      font-size: 12px;
-      color: white;
-    }
-
-    .step.active {
-      background-color: var(--accent-blue);
-    }
-
-    .step-label {
-      text-align: center;
-      font-size: 12px;
-      margin-top: 5px;
-      width: 70px;
-    }
-
-    .timeline {
-      text-align: left;
-      font-size: 14px;
-    }
-
-    .timeline .event {
-      border-bottom: 1px solid #eee;
-      padding: 10px 0;
-    }
-
-    .timeline .event:last-child {
-      border-bottom: none;
-    }
-
-    .timeline .event strong {
-      color: #2c3e50;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark mb-4 shadow-sm">
-    <div class="container">
-      <a class="navbar-brand" href="#hero">PLogistics</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#track">Track</a></li>
-          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
+      <div id="loader">
+        <div class="spinner-border text-primary"></div>
       </div>
-    </div>
-  </nav>
 
-  <!-- MAIN CONTENT -->
-  <main class="container mb-5">
-    <!-- TRACK SECTION -->
-    <section id="track" class="card p-4 mb-5 position-relative">
-      <h2 class="text-center mb-3">Track Your Shipment</h2>
-      <p>Enter your tracking number to view real-time shipment status, location, delivery estimates, and journey progress.</p>
-
-      <form class="row g-2 mb-3" onsubmit="event.preventDefault(); trackItem();">
-        <div class="col-md-8">
-          <input type="text" id="trackId" class="form-control" placeholder="Paste Your Tracking ID Here">
-        </div>
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-blue w-100">Track</button>
-        </div>
-      </form>
-
-      <div id="loader"></div>
       <div id="output" class="mt-3"></div>
-      <center><a href="#">Visit Main site</a></center>
+      <center><a href="#">Visit main site</a></center>
     </section>
 
     <!-- SERVICES -->
     <section id="services" class="card p-4 mb-5">
       <h2 class="text-center mb-3"><span class="section-icon">🛠️</span>Our Services</h2>
       <div class="row">
-        <div class="col-md-4 mb-3">
-          <div class="card h-100 p-3">
-            <h5>🛣️ Ground</h5>
-            <p>Reliable delivery via road networks with robust tracking and cost efficiency.</p>
-            <a href="#">Read More</a>
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <div class="card h-100 p-3">
-            <h5>✈️ Air Freight</h5>
-            <p>Fast, time-critical shipments with real-time visibility across international routes.</p>
-            <a href="#">Read More</a>
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <div class="card h-100 p-3">
-            <h5>🚢 Sea Freight</h5>
-            <p>Optimized global shipping for large-volume cargo with end-to-end documentation.</p>
-            <a href="#">Read More</a>
-          </div>
-        </div>
+        <div class="col-md-4 mb-3"><div class="card h-100 p-3"><h5>🛣️ Ground</h5><p>Reliable road delivery with robust tracking.</p></div></div>
+        <div class="col-md-4 mb-3"><div class="card h-100 p-3"><h5>✈️ Air Freight</h5><p>Time-critical shipments worldwide.</p></div></div>
+        <div class="col-md-4 mb-3"><div class="card h-100 p-3"><h5>🚢 Sea Freight</h5><p>Optimised global shipping for large cargo.</p></div></div>
       </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="card p-4 mb-5">
-      <h2 class="mb-3"><span class="section-icon">ℹ️</span>About Us</h2>
-      <p>ELoz Delivery is dedicated to operational excellence and customer-centric service, integrating advanced tech for seamless global trade.</p>
-      <a href="#">Read More</a>
+      <h2><span class="section-icon">ℹ️</span>About Us</h2>
+      <p>ELoz Delivery integrates advanced tech for seamless global trade.</p>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="card p-4 mb-5">
-      <h2 class="mb-3"><span class="section-icon">📞</span>Contact &amp; Policies</h2>
-      <p><strong>Email:</strong> support@elozdelivery.com<br>
-         <strong>Phone:</strong> +1 (234) 567-8901</p>
-      <p>Fair pricing and full refunds for lost packages. Our corporate support team is ready to assist.</p>
-      <a href="#">Read More</a>
+      <h2><span class="section-icon">📞</span>Contact &amp; Policies</h2>
+      <p><strong>Email:</strong> support@elozdelivery.com<br><strong>Phone:</strong> +1 (234) 567-8901</p>
+      <p>Fair pricing and full refunds for lost packages.</p>
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="text-center py-3">
+  <footer class="bg-dark text-light text-center py-3">
     <p class="mb-0">&copy; 2025 ELoz Delivery Service. All rights reserved.</p>
   </footer>
-
-  <!-- FULL-SCREEN TRACKING REPORT OVERLAY -->
-  <div id="trackingOverlay">
-    <div class="overlay-container">
-      <!-- Header -->
-      <div class="overlay-header">
-        <h2>LogiTrack</h2>
-        <p>Track your shipment below</p>
-        <span class="overlay-close" onclick="closeOverlay()">❌</span>
-      </div>
-
-      <!-- Body -->
-      <div class="overlay-body" id="overlayContent">
-        <!--
-          The detailed “track report” HTML will be injected here dynamically by JavaScript,
-          using the same layout (status box, summary, progress bar, timeline) as in your first example.
-        -->
-      </div>
-    </div>
-  </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Supabase & Tracking Script -->
+  <!-- Supabase & Tracker -->
   <script>
+    /* ----------  CONFIG  ---------- */
     const SUPABASE_URL = "https://zrzaivmhfzswsktwzmxs.supabase.co";
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpyemFpdm1oZnpzd3NrdHd6bXhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0OTQ1ODMsImV4cCI6MjA2NDA3MDU4M30.F9MY9rttTwBTs-AlK37eTHdnH5EoiQmPJN-b7ZDlgLU";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpyemFpdm1oZnpzd3NrdHd6bXhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0OTQ1ODMsImV4cCI6MjA2NDA3MDU4M30.F9MY9rttTwBTs-AlK37eTHdnH5EoiQmPJN-b7ZDlgLU"; // replace if rotated
 
+    /* ----------  FLAG HELPER  ---------- */
     const countryMap = {
-      "nigeria": "ng", "abuja": "ng", "lagos": "ng",
-      "united kingdom": "gb", "uk": "gb", "london": "gb",
-      "united states": "us", "usa": "us", "new york": "us", "los angeles": "us",
-      "germany": "de", "berlin": "de",
-      "france": "fr", "paris": "fr",
-      "china": "cn", "beijing": "cn",
-      "india": "in", "delhi": "in",
-      "canada": "ca", "toronto": "ca",
-      "ghana": "gh", "accra": "gh",
-      "kenya": "ke", "nairobi": "ke",
-      "south africa": "za", "johannesburg": "za",
-      "italy": "it", "rome": "it",
-      "spain": "es", "madrid": "es",
-      "netherlands": "nl", "amsterdam": "nl"
+      "nigeria":"ng","abuja":"ng","lagos":"ng",
+      "united kingdom":"gb","uk":"gb","london":"gb",
+      "united states":"us","usa":"us","new york":"us","los angeles":"us",
+      "germany":"de","france":"fr","china":"cn","india":"in","canada":"ca",
+      "ghana":"gh","kenya":"ke","south africa":"za",
+      "italy":"it","spain":"es","netherlands":"nl"
     };
-
-    function getFlagURL(location) {
-      if (!location) return "";
-      const normalized = location.toLowerCase().trim();
-      for (const key in countryMap) {
-        if (normalized.includes(key)) {
-          return `https://flagcdn.com/24x18/${countryMap[key]}.png`;
-        }
+    function getFlagURL(text){
+      if(!text) return "";
+      const norm=text.toLowerCase();
+      for(const key in countryMap){
+        if(norm.includes(key)) return `https://flagcdn.com/24x18/${countryMap[key]}.png`;
       }
       return "";
     }
 
-    function closeOverlay() {
-      // Remove the overlay and clear the input field
-      document.getElementById("trackingOverlay").style.display = "none";
-      document.getElementById("trackId").value = "";
-      // Optionally clear any content inside overlayContent
-      document.getElementById("overlayContent").innerHTML = "";
+    function closeResult(){
+      document.getElementById("output").innerHTML="";
+      document.getElementById("trackId").value="";
     }
 
-    async function trackItem() {
+    /* ----------  MAIN TRACKER  ---------- */
+    async function trackItem(){
       const id = document.getElementById("trackId").value.trim();
       const out = document.getElementById("output");
-      const load = document.getElementById("loader");
+      const loader = document.getElementById("loader");
       out.innerHTML = "";
-      load.style.display = "block";
+      loader.style.display = "block";
 
-      if (!id) {
-        load.style.display = "none";
-        out.innerHTML = `<p class="error">Please enter a tracking ID.</p>`;
+      if(!id){
+        loader.style.display="none";
+        out.innerHTML=`<p class="error">Please enter a tracking ID.</p>`;
         return;
       }
 
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/plogistics?id=eq.${id}`, {
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json'
-          }
-        });
-        const data = await res.json();
-        load.style.display = "none";
+        // Use encodeURIComponent to ensure any special characters are properly encoded
+        const encodedId = encodeURIComponent(id);
 
-        if (!data.length) {
-          out.innerHTML = `<p class="error">Item not found. Please check your ID.</p>`;
+        // Use 'ilike' for case-insensitive matching
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/plogistics?track_id=ilike.${encodedId}`,
+          {
+            headers: {
+              apikey: SUPABASE_KEY,
+              Authorization: `Bearer ${SUPABASE_KEY}`
+            }
+          }
+        );
+
+        const data = await res.json();
+        loader.style.display="none";
+
+        if(!data.length){
+          out.innerHTML=`<p class="error">No record found for that ID.</p>`;
           return;
         }
 
+        /* ----------  BUILD TABLE  ---------- */
         const item = data[0];
-        const flagOrigin = getFlagURL(item.origin);
-        const flagDest = getFlagURL(item.destination);
+        const flagFrom = getFlagURL(item.sent_from);
+        const flagTo   = getFlagURL(item.receiver_address);
 
-        // Build the “LogiTrack”‐style HTML for the overlay:
-        const html = `
-          <div class="tracking-container">
-            <div class="tracking-header">
-              <h2>Tracking Number: ${id}</h2>
-              <div class="status-box">
-                Status: <strong>${item.status || 'In Transit'}</strong>
-                ${item.estimated_arrival ? `| Expected Delivery: <strong>${item.estimated_arrival}</strong>` : ''}
-              </div>
-            </div>
+        const tbl = document.createElement("table");
+        tbl.className = "table table-bordered";
+        tbl.id = "trackingTable";
+        tbl.innerHTML = `
+          <thead>
+            <tr>
+              <th colspan="2">
+                📦 Tracking Details
+                <span class="close-icon" onclick="closeResult()">❌</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>Item Name</th><td>${item.item_name ?? "—"}</td></tr>
+            <tr><th>Tracking ID</th><td>${item.track_id}</td></tr>
+            <tr><th>Sender</th><td>${item.sender_name ?? "—"}</td></tr>
+            <tr><th>Sent From</th>
+                <td>${flagFrom?`<img class="flag-icon" src="${flagFrom}" alt="">`:""}${item.sent_from ?? "—"}</td></tr>
+            <tr><th>Date Sent</th><td>${item.date_sent ?? "—"}</td></tr>
+            <tr><th>Quantity</th><td>${item.quantity ?? "—"}</td></tr>
+            <tr><th>Weight</th><td>${item.weight ?? "—"}</td></tr>
+            <tr><th>Receiver</th><td>${item.receiver_name ?? "—"}</td></tr>
+            <tr><th>Receiver Address</th>
+                <td>${flagTo?`<img class="flag-icon" src="${flagTo}" alt="">`:""}${item.receiver_address ?? "—"}</td></tr>
+            <tr><th>Expected Delivery</th><td>${item.expected_delivery_d ?? item.expected_delivery_date ?? "—"}</td></tr>
+            <tr><th>Current Location</th><td>${item.current_location ?? "—"}</td></tr>
+            <tr><th>Status</th><td>${item.shipment_status ?? "—"}</td></tr>
+            <tr><th>Support Email</th><td>${item.support_email ?? "—"}</td></tr>
+            <tr><th>Created At</th><td>${item.created_at ?? "—"}</td></tr>
+          </tbody>`;
+        out.appendChild(tbl);
 
-            <div class="summary">
-              <div><strong>Origin:</strong> ${flagOrigin ? `<img class="flag-icon" src="${flagOrigin}" alt="">` : ''}${item.origin}</div>
-              <div><strong>Destination:</strong> ${flagDest ? `<img class="flag-icon" src="${flagDest}" alt="">` : ''}${item.destination}</div>
-              <div><strong>Service:</strong> ${item.service || 'Standard'}</div>
-              <div><strong>Weight:</strong> ${item.weight || '—'} ${item.weight_unit || ''}</div>
-            </div>
-
-            <div class="progress-bar-overlay">
-              <div class="step active" title="Shipment Received">1</div>
-              <div class="step active" title="In Transit">2</div>
-              <div class="step ${item.status === 'Out for Delivery' || item.status === 'Delivered' ? 'active' : ''}" title="Out for Delivery">3</div>
-              <div class="step ${item.status === 'Delivered' ? 'active' : ''}" title="Delivered">4</div>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 20px;">
-              <div class="step-label">Received</div>
-              <div class="step-label">In Transit</div>
-              <div class="step-label">Out for Delivery</div>
-              <div class="step-label">Delivered</div>
-            </div>
-
-            <div class="timeline">
-              <!--
-                Assuming your Supabase table has an array of event‐objects (timestamp & description).
-                If not, you can hardcode the two events like in your first example.
-              -->
-              ${generateTimelineHTML(item.timeline_events || [
-                { timestamp: item.sent_date, location: item.origin, desc: 'Shipment Received' },
-                { timestamp: item.current_timestamp, location: item.location, desc: 'In Transit' }
-              ])}
-            </div>
-
-            <div style="margin-top: 30px; text-align: center;">
-              <button class="btn btn-blue" onclick="contactSupport()">Contact Support</button>
-              <button class="btn btn-blue" onclick="downloadPDF('${id}')">Download PDF</button>
-            </div>
-          </div>
-        `;
-
-        // Inject into the overlay, then show it:
-        document.getElementById("overlayContent").innerHTML = html;
-        document.getElementById("trackingOverlay").style.display = "flex";
-
-      } catch (err) {
-        load.style.display = "none";
-        out.innerHTML = `<p class="error">Something went wrong. Try again later.</p>`;
-        console.error(err);
+      } catch(e) {
+        loader.style.display="none";
+        console.error(e);
+        out.innerHTML=`<p class="error">Something went wrong. Try again later.</p>`;
       }
-    }
-
-    // Helper to generate timeline HTML given an array of events:
-    function generateTimelineHTML(events) {
-      // Sort events in descending order (newest first)
-      events.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-      return events.map(ev => {
-        const dateObj = new Date(ev.timestamp);
-        const formattedDate = dateObj.toLocaleDateString('en-GB', {
-          month: 'long', day: 'numeric', year: 'numeric'
-        });
-        const formattedTime = dateObj.toLocaleTimeString('en-GB', {
-          hour: '2-digit', minute: '2-digit'
-        });
-        return `
-          <div class="event">
-            <strong>${formattedDate} - ${formattedTime}</strong><br>
-            ${ev.location} &ndash; ${ev.desc}
-          </div>
-        `;
-      }).join('');
-    }
-
-    function contactSupport() {
-      window.location.href = "mailto:support@elozdelivery.com";
-    }
-
-    function downloadPDF(trackingId) {
-      // Placeholder: implement your PDF download logic here.
-      alert("Downloading PDF for " + trackingId);
     }
   </script>
 </body>
