@@ -18,6 +18,24 @@
       --text-light:#222;
       --text-dark:#ddd;
     }
+    
+  /* Force light mode styles */
+  :root {
+    color-scheme: light;
+  }
+
+  /* Explicit background and text colors */
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  /* Reset any elements that might inherit dark mode styles */
+  * {
+    background-color: inherit;
+    color: inherit;
+  }
+
     body{
       font-family:'Raleway',sans-serif;
       background:var(--bg-light);
